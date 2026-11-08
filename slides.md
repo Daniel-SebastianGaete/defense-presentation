@@ -227,7 +227,7 @@ clicks: 4
 transition: zoom-in | zoom-out
 ---
 
-<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage I</span></h1>
+<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage I: Page analysis</span></h1>
 
 <ZoomFigure view="s1" next="ld" />
 
@@ -236,7 +236,7 @@ transition: zoom-out | zoom-in
 clicks: 2
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="ld" stage="both" :step="$clicks" />
 
@@ -244,7 +244,7 @@ clicks: 2
 transition: zoom-in | zoom-out
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="s1" next="ocr" prev="ld" />
 
@@ -253,7 +253,7 @@ transition: zoom-in | zoom-out
 clicks: 2
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="ocr" next="ocrtext" stage="before" :step="$clicks" />
 
@@ -262,7 +262,7 @@ transition: zoom-out | zoom-in
 clicks: 1
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="ocrtext" stage="after" :step="$clicks" />
 
@@ -270,7 +270,7 @@ clicks: 1
 transition: zoom-in | zoom-out
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="s1" next="rd" prev="ocrtext" />
 
@@ -279,7 +279,7 @@ transition: zoom-out | zoom-in
 clicks: 2
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="rd" stage="both" :step="$clicks" />
 
@@ -287,7 +287,7 @@ clicks: 2
 transition: zoom-in | zoom-out
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="s1" next="lm" prev="rd" />
 
@@ -296,7 +296,7 @@ transition: zoom-out | zoom-in
 clicks: 4
 ---
 
-<h1 class="zoom-title">3. Method - Stage I</h1>
+<h1 class="zoom-title">3. Method - Stage I: Page analysis</h1>
 
 <ZoomFigure view="lm" stage="both" :step="$clicks" />
 
@@ -304,7 +304,7 @@ clicks: 4
 transition: zoom-out | zoom-in
 ---
 
-<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage I</span></h1>
+<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage I: Page analysis</span></h1>
 
 <ZoomFigure view="s1" prev="lm" />
 
@@ -320,7 +320,7 @@ transition: zoom-in | zoom-out
 transition: zoom-in | zoom-out
 ---
 
-<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage II</span></h1>
+<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage II: Entity assembly</span></h1>
 
 <ZoomFigure view="s2" next="st1" />
 
@@ -329,7 +329,7 @@ transition: zoom-in | zoom-out
 clicks: 3
 ---
 
-<h1 class="zoom-title">3. Method - Stage II</h1>
+<h1 class="zoom-title">3. Method - Stage II: Entity assembly</h1>
 
 <ZoomFigure view="st1" next="st2" stage="before" :step="$clicks" />
 
@@ -338,7 +338,7 @@ transition: zoom-in | zoom-out
 clicks: 1
 ---
 
-<h1 class="zoom-title">3. Method - Stage II</h1>
+<h1 class="zoom-title">3. Method - Stage II: Entity assembly</h1>
 
 <ZoomFigure view="st2" next="st3" :step="$clicks + 3" />
 
@@ -347,7 +347,7 @@ transition: zoom-out | zoom-in
 clicks: 3
 ---
 
-<h1 class="zoom-title">3. Method - Stage II</h1>
+<h1 class="zoom-title">3. Method - Stage II: Entity assembly</h1>
 
 <ZoomFigure view="st3" stage="after" :step="$clicks + 4" />
 
@@ -355,7 +355,7 @@ clicks: 3
 transition: zoom-out | zoom-in
 ---
 
-<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage II</span></h1>
+<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage II: Entity assembly</span></h1>
 
 <ZoomFigure view="s2" prev="st3" />
 
@@ -371,7 +371,7 @@ transition: zoom-in | zoom-out
 transition: zoom-in | zoom-out
 ---
 
-<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage III</span></h1>
+<h1 class="zoom-title">3. Method<span class="zoom-etapa"> - Stage III: Entity typing</span></h1>
 
 <ZoomFigure view="s3" next="st4" />
 
@@ -380,7 +380,7 @@ transition: zoom-in | zoom-out
 clicks: 5
 ---
 
-<h1 class="zoom-title">3. Method - Stage III</h1>
+<h1 class="zoom-title">3. Method - Stage III: Entity typing</h1>
 
 <ZoomFigure view="st4" next="st5" stage="before" :step="$clicks" />
 
@@ -389,7 +389,7 @@ transition: zoom-out | zoom-in
 clicks: 3
 ---
 
-<h1 class="zoom-title">3. Method - Stage III</h1>
+<h1 class="zoom-title">3. Method - Stage III: Entity typing</h1>
 
 <ZoomFigure view="st5" stage="after" :step="$clicks + 5" />
 
