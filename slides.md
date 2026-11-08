@@ -42,12 +42,6 @@ clicks: 8
 </ol>
 
 ---
-layout: section
----
-
-# 1. Introduction
-
----
 clicks: 5
 ---
 
@@ -144,12 +138,6 @@ clicks: 5
 <ContentsList :active="2" />
 
 ---
-layout: section
----
-
-# 2. Related work
-
----
 layout: default
 ---
 
@@ -225,12 +213,6 @@ clicks: 5
 # Contents
 
 <ContentsList :active="3" />
-
----
-layout: section
----
-
-# 3. Method
 
 ---
 transition: zoom-in | zoom-out
@@ -422,12 +404,6 @@ clicks: 3
 # Contents
 
 <ContentsList :active="4" />
-
----
-layout: section
----
-
-# 4. Experiments
 
 ---
 layout: default
@@ -1190,12 +1166,6 @@ layout: default
 <ContentsList :active="5" />
 
 ---
-layout: section
----
-
-# 5. Case study
-
----
 layout: default
 ---
 
@@ -1435,12 +1405,6 @@ clicks: 5
 <ContentsList :active="6" />
 
 ---
-layout: section
----
-
-# 6. Discussion
-
----
 layout: default
 ---
 
@@ -1548,12 +1512,6 @@ layout: default
 # Contents
 
 <ContentsList :active="7" />
-
----
-layout: section
----
-
-# 7. Conclusion
 
 ---
 layout: default
