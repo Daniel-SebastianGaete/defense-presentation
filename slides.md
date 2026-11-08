@@ -42,12 +42,12 @@ clicks: 8
 </ol>
 
 ---
-clicks: 5
+clicks: 6
 ---
 
 # 1. Introduction
 
-<Scene :step="$clicks + 1" :bbox="[-6, -3, 6, 3]" :nodes="[
+<Scene :step="$clicks" :bbox="[-6, -3, 6, 3]" :nodes="[
   { id: 'kgb', x: -4.2, y: 1.5, w: 2.5, h: 2.5, img: '/figures/logo_kgb.png', from: 1 },
   { id: 'fbi', x: 0, y: 1.5, w: 2.5, h: 2.5, img: '/figures/logo_fbi.png', from: 2 },
   { id: 'cia', x: 4.2, y: 1.5, w: 2.5, h: 2.5, img: '/figures/logo_cia.png', from: 3 },
