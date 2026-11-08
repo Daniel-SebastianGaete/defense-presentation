@@ -1,0 +1,262 @@
+/* Tighter table rows so the 8-9 row result tables fit on one slide. */
+.slidev-layout table td,
+.slidev-layout table th {
+  padding-top: 0.15rem;
+  padding-bottom: 0.15rem;
+}
+
+/*
+ * Zoom between the architecture figure and the close-up of one stage. Only the
+ * figure (`.zoom-figure`, clipped by `.zoom-clip`) moves; the title stays put
+ * and " - Etapa N" fades in. The full figure carries, as custom properties, the
+ * transform that lands each stage exactly where its close-up slide draws it:
+ * `--zoom-in-t` for the stage it zooms into going forward and `--zoom-out-t`
+ * for the one it was reached from (the figure box is 868x380 at 56,96 in the
+ * 980x552 slide). `zoom-in`: the zoom runs first, then the close-up appears on
+ * top of the aligned figure and the old figure fades away, so nothing is ever
+ * drawn twice out of register. `zoom-out` plays the same sequence backwards.
+ *
+ * The slide wrappers only carry a dummy transition of the full length: Vue
+ * reads it to know when the transition is over.
+ */
+.zoom-in-leave-active,
+.zoom-in-enter-active,
+.zoom-out-leave-active,
+.zoom-out-enter-active {
+  transition: opacity 0.7s linear;
+}
+
+.zoom-clip {
+  /* The full figure area, whatever the view drawn in it. */
+  height: 380px;
+  overflow: hidden;
+}
+
+.zoom-figure {
+  transform-origin: 0 0;
+}
+
+/* Forward */
+.zoom-in-leave-active .zoom-figure {
+  transition: transform 0.6s cubic-bezier(0.3, 0, 0.1, 1) 0s, opacity 0.25s linear 0.45s;
+}
+
+.zoom-in-leave-to .zoom-figure {
+  transform: var(--zoom-in-t);
+  opacity: 0;
+}
+
+/* Going back, the figure zooms into the stage it was reached from. */
+.slidev-nav-go-backward .zoom-in-leave-to .zoom-figure {
+  transform: var(--zoom-out-t);
+}
+
+.zoom-in-enter-active .zoom-figure {
+  transition: opacity 0.12s linear 0.45s;
+}
+
+.zoom-in-enter-from .zoom-figure {
+  opacity: 0;
+}
+
+/* The old title is handed over to the new one when the zoom is done. */
+.zoom-in-leave-active .zoom-title,
+.zoom-in-enter-active .zoom-title,
+.zoom-out-leave-active .zoom-title,
+.zoom-out-enter-active .zoom-title {
+  transition: visibility 0s linear 0.45s;
+}
+
+.zoom-in-leave-to .zoom-title,
+.zoom-in-enter-from .zoom-title {
+  visibility: hidden;
+}
+
+.zoom-in-enter-active .zoom-etapa {
+  transition: opacity 0.25s linear 0.45s;
+}
+
+.zoom-in-enter-from .zoom-etapa {
+  opacity: 0;
+}
+
+/* Backward */
+.zoom-out-leave-active .zoom-title,
+.zoom-out-enter-active .zoom-title {
+  transition-delay: 0.25s;
+}
+
+.zoom-out-leave-to .zoom-title,
+.zoom-out-enter-from .zoom-title {
+  visibility: hidden;
+}
+
+.zoom-out-leave-active .zoom-etapa {
+  transition: opacity 0.25s linear;
+}
+
+.zoom-out-leave-to .zoom-etapa {
+  opacity: 0;
+}
+
+.zoom-out-enter-active .zoom-figure {
+  transition: transform 0.6s cubic-bezier(0.9, 0, 0.7, 1) 0.1s, opacity 0.25s linear 0s;
+}
+
+.zoom-out-enter-from .zoom-figure {
+  transform: var(--zoom-out-t);
+  opacity: 0;
+}
+
+.slidev-nav-go-backward .zoom-out-enter-from .zoom-figure {
+  transform: var(--zoom-in-t);
+}
+
+.zoom-out-leave-active .zoom-figure {
+  transition: opacity 0.12s linear 0.13s;
+}
+
+.zoom-out-leave-to .zoom-figure {
+  opacity: 0;
+}
+
+/*
+ * What a close-up shows besides its box (the pages, the transcription, the
+ * links: `.extra`) is not part of the stage, so it goes first when leaving for
+ * the stage and comes last when arriving from it, and the box alone is what
+ * zooms. `data-stage` says on which side the stage is: "before" for the slide
+ * that follows its stage, "after" for the one that precedes it, "both" for one
+ * between two views of its stage. The pan between two close-ups keeps its
+ * extras.
+ */
+.slidev-nav-go-forward .zoom-out-leave-active .zoom-figure[data-stage='after'] .extra,
+.zoom-out-leave-active .zoom-figure[data-stage='both'] .extra,
+.slidev-nav-go-backward .zoom-out-leave-active .zoom-figure[data-stage='before'] .extra {
+  transition: opacity 0.1s linear;
+}
+
+.slidev-nav-go-forward .zoom-out-leave-to .zoom-figure[data-stage='after'] .extra,
+.zoom-out-leave-to .zoom-figure[data-stage='both'] .extra,
+.slidev-nav-go-backward .zoom-out-leave-to .zoom-figure[data-stage='before'] .extra {
+  opacity: 0;
+}
+
+.slidev-nav-go-forward .zoom-in-enter-active .zoom-figure[data-stage='before'] .extra,
+.zoom-in-enter-active .zoom-figure[data-stage='both'] .extra,
+.slidev-nav-go-backward .zoom-in-enter-active .zoom-figure[data-stage='after'] .extra {
+  transition: opacity 0.25s linear 0.57s;
+}
+
+.slidev-nav-go-forward .zoom-in-enter-from .zoom-figure[data-stage='before'] .extra,
+.zoom-in-enter-from .zoom-figure[data-stage='both'] .extra,
+.slidev-nav-go-backward .zoom-in-enter-from .zoom-figure[data-stage='after'] .extra {
+  opacity: 0;
+}
+
+/*
+ * Between the full diagram with its box in question and the one of the next subsection. The figure
+ * is the same in both, so it is never drawn twice: the one that leaves is hidden at once, all but
+ * the red rectangle, which fades out over the other one (or in, going back). The title keeps its
+ * first word and swaps what follows it: the old text fades out, and then the new one fades in.
+ */
+.subsection-leave-active,
+.subsection-enter-active {
+  transition: opacity 0.75s linear;
+}
+
+.subsection-leave-active .zoom-figure,
+.subsection-leave-active .swap-prefix {
+  visibility: hidden;
+}
+
+.subsection-leave-active .ask-rect {
+  visibility: visible;
+}
+
+.subsection-leave-to .ask-rect,
+.subsection-enter-from .ask-rect {
+  opacity: 0 !important;
+}
+
+.subsection-leave-active .swap-sub {
+  transition: opacity 0.35s linear;
+}
+
+.subsection-enter-active .swap-sub {
+  transition: opacity 0.35s linear 0.35s;
+}
+
+.subsection-leave-to .swap-sub,
+.subsection-enter-from .swap-sub {
+  opacity: 0;
+}
+
+/* A subtitle under a slide's title: indented, and a step smaller than the theme's h2. */
+.slidev-layout h2.subtitle {
+  margin-left: 2rem;
+  font-size: 1.5rem;
+}
+
+/* An example (an image of a page of a collection, or a sentence): framed so it stands out from the slide. */
+.slidev-layout img.example,
+.slidev-layout div.example {
+  border: 2px solid #8a8f98;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.18);
+}
+
+/*
+ * A sentence of the Text Anonymization Benchmark as its annotation tool draws it: each entity is a
+ * chip filled with the colour of its type, and a masked entity is a chip of asterisks. The colours
+ * are those of the screenshots of the tool.
+ */
+.slidev-layout .tab-sentence {
+  font-family: Arial, 'Liberation Sans', Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 2;
+  padding: 8px 18px;
+  color: #202124;
+  background: #fff;
+}
+
+.tab-sentence .ent {
+  background: var(--ent-fill);
+  border: 1px solid var(--ent-border);
+  border-radius: 5px;
+  padding: 1px 3px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition: background-color 0.4s, border-color 0.4s;
+}
+
+.tab-sentence .ent.green { --ent-fill: #ccf5b9; --ent-border: #a9d49c; }
+.tab-sentence .ent.blue { --ent-fill: #d9e8ff; --ent-border: #b0c4e0; }
+.tab-sentence .ent.lilac { --ent-fill: #f7d2fe; --ent-border: #dcb6e8; }
+.tab-sentence .ent.salmon { --ent-fill: #ebb1af; --ent-border: #cf9a98; }
+.tab-sentence .ent.yellow { --ent-fill: #f0eba9; --ent-border: #d4d193; }
+.tab-sentence .ent.mint { --ent-fill: #c8ffe8; --ent-border: #b5e3cd; }
+
+/* A list with one entry in focus (`.focus` on the list, `.on` on the entry): every other entry goes grey. */
+.slidev-layout ol.focus > li:not(.on) {
+  opacity: 0.25;
+  transition: opacity 0.4s ease;
+}
+
+/* A table row the speaker points at: lit by a click (`:class="{ hl: ... }"` on the row). */
+.slidev-layout tr td { transition: background-color 0.3s; }
+.slidev-layout tr.hl td { background-color: #f0eba9; }
+
+/*
+ * A red frame around a block of table cells (`:class="{ 'fr-tl': ... }"` on each cell): every cell paints
+ * only the edges it lies on, inside its own box, so the frame adds no border and moves nothing. The
+ * frame fades in a beat after the cells themselves, which keep their own click fade.
+ */
+.slidev-layout td.fr-tl,
+.slidev-layout td.fr-tr,
+.slidev-layout td.fr-bl,
+.slidev-layout td.fr-br {
+  transition: opacity 100ms ease, box-shadow 0.4s ease 0.3s;
+}
+.slidev-layout td.fr-tl { box-shadow: inset 3px 0 0 #e53935, inset 0 3px 0 #e53935; }
+.slidev-layout td.fr-tr { box-shadow: inset -3px 0 0 #e53935, inset 0 3px 0 #e53935; }
+.slidev-layout td.fr-bl { box-shadow: inset 3px 0 0 #e53935, inset 0 -3px 0 #e53935; }
+.slidev-layout td.fr-br { box-shadow: inset -3px 0 0 #e53935, inset 0 -3px 0 #e53935; }
