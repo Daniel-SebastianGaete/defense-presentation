@@ -1425,7 +1425,13 @@ layout: default
 </div>
 
 <div class="flex justify-center mt-4">
-  <img v-click="3" class="example" src="/figures/limitations_detection_bottom.jpg" style="height: 270px" />
+  <div class="relative">
+    <img v-click="3" class="example block" src="/figures/limitations_detection_bottom.jpg" style="height: 270px" />
+    <div v-click="4" class="absolute flex items-center" style="left: 100%; top: 85%; width: 90px; margin-left: 8px; transform: translateY(-50%)">
+      <div style="border-right: 22px solid #e53935; border-top: 11px solid transparent; border-bottom: 11px solid transparent"></div>
+      <div style="flex: 1; height: 5px; background: #e53935"></div>
+    </div>
+  </div>
 </div>
 
 ---
