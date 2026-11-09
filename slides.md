@@ -1749,3 +1749,155 @@ layout: default
 </table>
 
 </div>
+
+---
+layout: default
+---
+
+# Complementary Material - Mask R-CNN (X101-FPN)
+
+<div class="flex items-center gap-8 mt-4">
+
+<div class="w-7/12">
+
+- Extends Faster R-CNN with a parallel branch that predicts a segmentation mask for each RoI.
+- **Two-stage** detector: an RPN generates proposals, then a head classifies them, refines the bounding boxes and predicts masks.
+- Introduces **RoI Align**, which removes the quantisation of RoI Pooling for better spatial alignment.
+- Backbone: **ResNeXt-101 (32x8d) + FPN** for multi-scale detection.
+
+</div>
+
+<img class="w-5/12" src="/figures/models/maskrcnn.png" />
+
+</div>
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: He et al. (2017)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - Mask2Former (Swin-T)
+
+<div class="flex items-center gap-8 mt-4">
+
+<div class="w-7/12">
+
+- **Universal** segmentation architecture: panoptic, instance and semantic segmentation with a single model.
+- Three components: backbone (Swin-T), pixel decoder, and a Transformer decoder that predicts binary masks and classes.
+- Introduces **masked attention**: each query attends only to the region delimited by its predicted mask, improving convergence.
+- State of the art on COCO (57.8 PQ, 50.1 AP) and ADE20K (57.7 mIoU).
+
+</div>
+
+<img class="w-5/12" src="/figures/models/mask2former.png" />
+
+</div>
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Cheng et al. (2022)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - RTMDet-X
+
+<div class="flex items-center gap-8 mt-4">
+
+<div class="w-7/12">
+
+- Real-time **one-stage, anchor-free** detector from OpenMMLab. RTMDet-X reaches 52.8% AP on COCO.
+- **CSPNeXt** backbone with **large-kernel depth-wise convolutions** (5×5) to widen the receptive field.
+- **Dynamic label assignment** (SimOTA), which adapts the ground-truth assignment during training.
+- Design based on a systematic empirical study of macro-architecture, blocks and training strategies.
+
+</div>
+
+<img class="w-5/12" src="/figures/models/rtmdet.jpg" />
+
+</div>
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Lyu et al. (2022)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - RF-DETR
+
+<div class="flex items-center gap-8 mt-4">
+
+<div class="w-7/12">
+
+- Real-time transformer-based detector developed by **Roboflow** (2025).
+- **DINOv2** backbone (pre-trained ViT) with a decoder based on Deformable DETR. No NMS and no anchor boxes.
+- Uses **Neural Architecture Search (NAS)** with weight sharing to find optimal accuracy/latency Pareto curves.
+- First real-time model to exceed **60 AP on COCO**.
+
+</div>
+
+<img class="w-5/12" src="/figures/models/rfdetr.png" />
+
+</div>
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Robinson et al. (2025)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - RT-DETRv2
+
+<div class="mt-4">
+
+- Refines RT-DETR with a set of training and architecture improvements.
+- RT-DETR: first end-to-end transformer-based detector that runs in **real time** (Baidu).
+- **Hybrid encoder**: intra-scale interaction (AIFI, self-attention) plus cross-scale fusion (CCFM, CNN).
+- **IoU-aware query selection**, which gives the decoder high-quality initial queries.
+- **No NMS** in post-processing. RT-DETR-R50: 53.1% AP at 108 FPS (T4).
+
+</div>
+
+<img class="mx-auto mt-3" src="/figures/models/rtdetr.jpg" style="width: 68%" />
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Zhao et al. (2024); Lv et al. (2024)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - YOLO26-Small
+
+<div class="flex items-center gap-8 mt-4">
+
+<div class="w-7/12">
+
+- Latest YOLO generation from Ultralytics (2026), designed for edge devices.
+- **End-to-end inference without NMS**: one-to-one head with direct predictions. The DFL module is removed.
+- New techniques: **ProgLoss** (stabilisation), **STAL** (small objects) and the **MuSGD** optimiser.
+- YOLO26s: 9.5M parameters, 20.7B FLOPs, 48.6 mAP@50-95 on COCO.
+
+</div>
+
+<img class="w-5/12" src="/figures/models/yolo26s.png" />
+
+</div>
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Jocher &amp; Qiu (2026)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - YOLO26-Small-Seg
+
+<div class="mt-4 w-5/6">
+
+- Shares the **backbone and neck** with YOLO26-Small: the same base architecture, unified across several tasks.
+- Adds the **Segment26** head with the **Proto26** module, which uses multi-scale information to generate instance masks.
+- Parameters rise from 9.5M to **10.4M** (+0.9M) and FLOPs from 20.7B to **34.2B** (+13.5B), attributable to the mask head.
+- Includes an additional semantic-segmentation loss to improve convergence.
+
+</div>
+
+<p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Jocher &amp; Qiu (2026)</p>
