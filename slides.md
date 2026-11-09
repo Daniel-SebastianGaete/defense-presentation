@@ -1901,3 +1901,121 @@ layout: default
 </div>
 
 <p class="absolute bottom-10 left-14 text-xs opacity-60">Source: Jocher &amp; Qiu (2026)</p>
+
+---
+layout: default
+---
+
+# Complementary Material - Random Forest
+
+- An **ensemble of decision trees**. A tree classifies by asking a sequence of threshold questions about the features until it reaches a leaf that carries a class.
+- **Bagging**: each tree is trained on a different bootstrap sample of the training rows (drawn with replacement).
+- **Random feature subsets**: at each split a tree considers only a random subset of the features, which makes the trees less correlated with one another.
+- The forest **combines the votes** of its trees. Averaging many uncorrelated trees reduces the variance of a single, deep tree.
+
+<div class="flex items-center justify-center gap-2 mt-3 text-sm">
+  <div class="flex flex-col gap-1">
+    <div class="border-2 border-gray-400 rounded px-4 py-1 text-center bg-gray-50">Tree 1</div>
+    <div class="border-2 border-gray-400 rounded px-4 py-1 text-center bg-gray-50">Tree 2</div>
+    <div class="border-2 border-gray-400 rounded px-4 py-1 text-center bg-gray-50">…</div>
+    <div class="border-2 border-gray-400 rounded px-4 py-1 text-center bg-gray-50">Tree N</div>
+  </div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-4 py-2 text-center bg-gray-50">Vote</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-4 py-2 text-center bg-gray-50">Class</div>
+</div>
+
+---
+layout: default
+---
+
+# Complementary Material - Gradient Boosting
+
+- An **additive model** of decision trees, built one tree at a time.
+- Each new tree is fitted to the **errors** of the ensemble so far (the negative gradient of the loss), so it corrects what the previous trees get wrong.
+- The prediction is the **sum of the trees' outputs**, each scaled by a learning rate that limits how much any single tree contributes.
+
+$$ F(x) = F_0 + \eta\,T_1(x) + \eta\,T_2(x) + \dots + \eta\,T_M(x) $$
+
+---
+layout: default
+---
+
+# Complementary Material - SVM (RBF)
+
+- A **support vector machine** looks for the boundary between two classes with the **largest margin**. Only the points closest to the boundary, the **support vectors**, define it.
+- A **soft margin** lets some points fall on the wrong side, trading margin width against training errors.
+- The **kernel trick** replaces dot products by a kernel function, which amounts to separating the classes linearly in a higher-dimensional space. The boundary is then non-linear in the original space.
+- The **RBF kernel** measures similarity by distance: it decays smoothly as two embeddings move apart, so each support vector acts as a local bump and the boundary can be very flexible.
+- Binary by nature; several classes are handled by combining binary classifiers.
+
+$$ K(x, z) = \exp\!\left(-\gamma\,\lVert x - z \rVert^2\right) $$
+
+---
+layout: default
+---
+
+# Complementary Material - SVM (polynomial)
+
+- The same **maximum-margin classifier**, with a different kernel.
+- The **polynomial kernel** works with the dot product between two embeddings, raised to a power $d$ (the degree).
+- It implicitly considers **all interactions between features up to degree $d$**, so the decision boundary is a polynomial function of the embedding.
+- The degree sets the flexibility: the higher it is, the more complex the boundaries that can be drawn.
+- Unlike the RBF kernel, similarity is not tied to the distance between points but to their dot product.
+
+$$ K(x, z) = \left(\gamma\, x^{\top} z + r\right)^{d} $$
+
+---
+layout: default
+---
+
+# Complementary Material - DNN
+
+- A **fully connected network** (multi-layer perceptron): every unit of a layer is connected to every unit of the next one.
+- Each layer applies a **linear transformation followed by a non-linear activation function**, so the network can learn non-linear combinations of the input dimensions.
+- The hidden layers learn **intermediate representations** of the input.
+- The last layer gives one **score per class**; a softmax turns the scores into probabilities.
+- It is trained end to end by **backpropagation**, minimising a cross-entropy loss with a gradient-based optimiser.
+
+<div class="flex items-center justify-center gap-2 mt-8 text-sm">
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Input</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Linear<br>+ activation</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Linear<br>+ activation</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">…</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Linear</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Softmax</div>
+</div>
+
+---
+layout: default
+---
+
+# Complementary Material - CNN
+
+- A **convolutional network**, here one-dimensional: the input is treated as a one-dimensional signal.
+- **Convolutional filters** slide along the signal. The same small set of weights is applied at every position (weight sharing), so each filter detects a local pattern.
+- **Pooling** layers downsample the resulting feature maps, keeping the strongest responses and reducing their size.
+- The extracted features are flattened and passed to **fully connected layers**, which give one score per class.
+- It is trained end to end by **backpropagation**, like the DNN.
+
+<div class="flex items-center justify-center gap-2 mt-8 text-sm">
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Input</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Convolution<br>+ activation</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Pooling</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">…</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Flatten</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Fully<br>connected</div>
+  <span>→</span>
+  <div class="border-2 border-gray-400 rounded px-3 py-2 text-center bg-gray-50">Softmax</div>
+</div>
